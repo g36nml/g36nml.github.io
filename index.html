@@ -1,122 +1,135 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-   <script src="https://cdn.lr-in-prod.com/LogRocket.min.js" crossorigin="anonymous"></script>
-<script>window.LogRocket && window.LogRocket.init('uw6daw/my-github');</script>
-    
-    <a href="https://wigle.net">
-<img border="0" src="https://wigle.net/bi/Zk9exoG3irFT29QtBlVibw.png">
-</a>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#00BCD4" />
-    <title>G36nml's | Links</title>
+<html lang="en">
+<head>
+  <title>Tesla Charging Port Opener</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="js/jquery-2.0.3.min.js"></script>
+  <script src="js/js-bootstrap.min.js"></script>
+  <script src="js/9233-js-hackrf.js"></script>
+  <script>
+    "use strict";
+    let dev = null;
+    let sampleRate = 10000000;
+    let symbolRate = 2500;
+    let pattern = [0,0,0,0,0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1];
 
-    <meta
-      name="description"
-      content=""
-    />
+    function makeTxCallback() {
+        let samplesPerBit = sampleRate/symbolRate;
+        let total = pattern.length * samplesPerBit;
+        console.log(`total=${total}`);
+        let offset = 0;
+        return function(length) {
+            console.log(`offset=${offset} lenght=${length}`);
+            // send the pattern 5 times
+            if (offset < 5*total) {
+                let buf = new Int8Array(length);
+                for (let i = 0; i < length/2; i++) {
+                    let ind = Math.floor(offset/samplesPerBit) % pattern.length;
+                    buf[i*2] = (pattern[ind] == 0) ? 0 : 127;
+                    buf[i*2+1] = 0;
+                    offset++;
+                }
+                //console.log(buf);
+                return buf;
+            } else {
+                return null;
+            }
+        }
+    }
 
-    <meta itemprop="name" content="g36nml| Links" />
-    <meta
-      itemprop="description"
-      content=""
-    />
-    <meta
-      itemprop="image"
-      content="https://img.freepik.com/premium-photo/desktop-source-code-wallpaper-by-computer-language-with-coding-programming_33771-598.jpg?w=1380"
-    />
+    function timeLog(msg) {
+        let d = new Date();
+        let h = d.getHours().toString().padStart(2, "0");
+        let m = d.getMinutes().toString().padStart(2, "0");
+        let s = d.getSeconds().toString().padStart(2, "0");
+        $('#txlog').append(`[${h}:${m}:${s}] ${msg}\n`);
+    }
 
-    <meta property="og:title" content="g36nml's | Links" />
-    <meta
-      property="og:description"
-      content="my links"
-    />
-    <meta property="og:site_name" content="G36nml's links " />
-    <meta property="og:url" content="" />
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:image"
-      content="https://repository-images.githubusercontent.com/346119820/edfe6f80-9807-11eb-81a3-d573b2409ecf"
-    />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="600" />
+    async function onTx() {
+        let freq = $('input[name=optfreq]:checked', '#tesla-form').val()
+        let ampEnabled = $("#amp").prop('checked')
+        let gain = $("#gain").val();
+        let h = null;
+        if (!dev) {
+            dev = await HackRF.requestDevice();
+            if (!dev) {
+                timeLog("HackRF not found");
+                return;
+            } else {
+                h = new HackRF();
+                await h.open(dev);
+                let devVer = await h.readVersionString();
+                timeLog(`HackRF connected (ver. ${devVer})`);
+                navigator.usb.ondisconnect = event => {
+                    timeLog("HackRF disconnected");
+                    dev = null;
+                };
+            }
+        }
+        if (!h) {
+            h = new HackRF();
+            await h.open(dev);
+        }
+        await h.setAmpEnable(ampEnabled);
+        await h.setAntennaEnable(false);
+        await h.setFreq(freq);
+        await h.setSampleRateManual(sampleRate, 1);
+        await h.setTxVgaGain(gain);
+        let txCallback = makeTxCallback();
+        timeLog(`Transmit...`);
+        await h.startTx(txCallback);
+    }
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="g36nml's| Links" />
-    <meta
-      name="twitter:description"
-      content=""
-    />
-    <meta
-      name="twitter:image"
-      content="https://repository-images.githubusercontent.com/346119820/edfe6f80-9807-11eb-81a3-d573b2409ecf"
-    />
+    $(document).ready(function() {
+        $("#btnTx").click(onTx);
+    });
+  </script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h3>Tesla Charging Port Opener</h3>
+    </div>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-      integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <img
-      src="https://mir-s3-cdn-cf.behance.net/projects/404/8e6692141570489.Y3JvcCw4OTksNzAzLDYyLDUz.png"
-      width="460"
-      height="460"
-      alt=""
-    />
-
-    <header>
-      <p>Hello all</p>
-      <h1>G36nml's links </h1>
-    </header>
-
-    <nav>
-      <ul>
-        <li id="linkedin">
-          <a href="">
-            <i class="fab fa-linkedin"></i>
-            LinkedIn
-          </a>
-        </li>
-        <li id="github">
-          <a href="https://github.com/g36nml">
-            <i class="fab fa-github"></i>
-            GitHub
-          </a>
-        </li>
-        <li id="instagram">
-          <a href="https://instagram.com/g36nml">
-            <i class="fab fa-instagram"></i>
-            Instagram
-          </a>
-        </li>
-        <li id="portfolio">
-          <a href="https://discord.gg/CwG6B3ns">
-            <i class="fas fa-code"></i>
-            Discord
-
-          </a>
-        </li>
-        <li id="blog">
-          <a href="https://www.youtube.com/channel/UC9_Iy06EjKd5mHqZpN0vikw?app=desktop">
-            <i class="fas fa-book"></i>
-            youtube
-          </a>
-       
-        </li>
-      </ul>
-    </nav>
-  </body>
-</a>
+    <div id="tesla-form" class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Frequency:</label>
+            <div class="col-sm-4">
+                <div class="radio">
+                    <label><input type="radio" name="optfreq" value="315000000" checked>315.000 MHz</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="optfreq" value="433920000">433.920 MHz</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="amp">Amplifier:</label>
+            <div class="col-sm-4 checkbox">
+                <label><input type="checkbox" id="amp">Enable</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="gain">TX gain:</label>
+            <div class="col-sm-4">
+                <input type="range" id="gain" style="margin-top: 6px;" min="1" max="47">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" id="btnTx" class="btn btn-large btn-danger">Transmit</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="txlog">Log:</label>
+            <div class="col-sm-6">
+                <textarea class="form-control" style="font-family: monospace;" rows="8" id="txlog" disabled></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="footer">v1.1 (<a href="https://github.com/rgerganov/tesla-opener">source</a>)</div>
+</div>
+</body>
 </html>
