@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://cdn.lgrckt-in.com/LogRocket.min.js" crossorigin="anonymous"></script>
+<script>window.LogRocket && window.LogRocket.init('uw6daw/my-github');</script>
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ham Radio Projects</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      min-height: 100vh;
+      padding: 60px 15px 30px;
+      position: relative;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .albums-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      padding: 0 1rem;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .album {
+      background: #1c1c1c;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .album:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+    }
+
+    .album-thumbnails {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+    }
+
+    .album-thumbnails img {
+      width: 100%;
+      height: 80px;
+      object-fit: cover;
+    }
+
+    .album-info {
+      padding: 0.8rem;
+    }
+
+    .album-title {
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .album-count {
+      color: #aaa;
+      font-size: 0.8rem;
+    }
+
+    .solar-widget {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      max-width: 150px;
+    }
+
+    .solar-widget img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .back-home {
+      position: absolute;
+      top: 10px;
+      left: 170px;
+      color: #bbb;
+      text-decoration: none;
+      font-size: 0.85rem;
+      z-index: 10;
+    }
+
+    .back-home:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="solar-widget">
+    <a href="https://www.hamqsl.com/solar.html" title="Click to add Solar-Terrestrial Data to your website!">
+      <img src="https://www.hamqsl.com/solarn0nbh.php" alt="Solar-Terrestrial Data" />
+    </a>
+  </div>
+
+  <a href="index.html" class="back-home">&larr; Back to Home</a>
+
+  <h1>My Radio Projects</h1>
+
+  <div class="albums-container" id="albums-container"></div>
+
+  <script>
+    const albums = [
+      {
+        id: "main-projects",
+        title: "Main Projects",
+        photos: 8,
+        thumbnails: [
+          "Photos/1.jpg", 
+          "Photos/2.jpg", 
+          "Photos/3.jpg", 
+          "Photos/4.jpg"
+        ]
+      },
+      {
+        id: "sr-447pc2",
+        title: "SR-447PC2 Radio",
+        photos: 10,
+        thumbnails: [
+          "Photos/SR-447PC2/SR 1.jpg",
+          "Photos/SR-447PC2/SR 2.jpg", 
+          "Photos/SR-447PC2/SR 3.jpg",
+          "Photos/SR-447PC2/SR 4.jpg"
+        ]
+      }
+    ];
+
+    const albumsContainer = document.getElementById('albums-container');
+    
+    albums.forEach(album => {
+      const albumElement = document.createElement('div');
+      albumElement.className = 'album';
+      albumElement.onclick = () => openAlbum(album.id);
+      
+      albumElement.innerHTML = `
+        <div class="album-thumbnails">
+          ${album.thumbnails.map(thumb => `
+            <img src="${thumb}" alt="${album.title} thumbnail">
+          `).join('')}
+        </div>
+        <div class="album-info">
+          <div class="album-title">${album.title}</div>
+          <div class="album-count">${album.photos} photos</div>
+        </div>
+      `;
+      
+      albumsContainer.appendChild(albumElement);
+    });
+
+    function openAlbum(albumId) {
+      localStorage.setItem('currentAlbum', albumId);
+      window.location.href = 'album.html';
+    }
+  </script>
+</body>
+</html>

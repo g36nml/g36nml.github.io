@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.lgrckt-in.com/LogRocket.min.js" crossorigin="anonymous"></script>
+<script>window.LogRocket && window.LogRocket.init('uw6daw/my-github');</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About My Ham Radio Setup</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      min-height: 100vh;
+      padding: 60px 15px 30px;
+      position: relative;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+
+    .content-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .rig-section {
+      background: #1c1c1c;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    h2 {
+      color: #4a90e2;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      border-bottom: 1px solid #333;
+      padding-bottom: 0.5rem;
+    }
+
+    .rig-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    .rig-item {
+      background: #252525;
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 4px solid #4a90e2;
+    }
+
+    .rig-item h3 {
+      color: #4a90e2;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .rig-specs {
+      list-style-type: none;
+    }
+
+    .rig-specs li {
+      margin-bottom: 0.3rem;
+      padding-left: 1.2rem;
+      position: relative;
+      line-height: 1.4;
+    }
+
+    .rig-specs li:before {
+      content: "•";
+      color: #4a90e2;
+      position: absolute;
+      left: 0;
+    }
+
+    .solar-widget {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      max-width: 150px;
+    }
+
+    .solar-widget img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .back-home {
+      position: absolute;
+      top: 10px;
+      left: 170px;
+      color: #bbb;
+      text-decoration: none;
+      font-size: 0.85rem;
+      z-index: 10;
+    }
+
+    .back-home:hover {
+      text-decoration: underline;
+    }
+
+    .special-note {
+      font-style: italic;
+      color: #aaa;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="solar-widget">
+    <a href="https://www.hamqsl.com/solar.html" title="Click to add Solar-Terrestrial Data to your website!">
+      <img src="https://www.hamqsl.com/solarn0nbh.php" alt="Solar-Terrestrial Data" />
+    </a>
+  </div>
+
+  <a href="index.html" class="back-home">&larr; Back to Home</a>
+
+   <div class="content-wrapper">
+    <h1>My Complete Ham Radio Station</h1>
+
+     <img src="Cert.jpg" alt="Certification" style="height: auto; max-width: 300px; margin-left: 800px;">
+</h1>
+
+    <!-- HF Station Section -->
+    <div class="rig-section">
+      <h2>HF Station</h2>
+      <div class="rig-list">
+        <div class="rig-item">
+          <h3>Xiegu G90</h3>
+          <ul class="rig-specs">
+            <li><strong>Power:</strong> 20W (200W PEP with RM Italy KL-503)</li>
+            <li><strong>Antenna:</strong> MFJ 80-40m dipole at 45ft</li>
+            <li><strong>Audio:</strong> AT202 XLR mic → Xenyx 802 mixer → G90</li>
+            <li><strong>Features:</strong> Built-in antenna tuner, waterfall display</li>
+            <li><strong>Mods:</strong> External cooling fan, improved filtering</li>
+          </ul>
+        </div>
+
+        <div class="rig-item">
+          <h3>ATS-20</h3>
+          <ul class="rig-specs">
+            <li><strong>Type:</strong> Portable HF Receiver</li>
+            <li><strong>Bands:</strong> 80m-10m coverage</li>
+            <li><strong>Features:</strong> Portable SDR receiver</li>
+            <li><strong>Usage:</strong> Field monitoring and SWL</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- VHF/UHF Section -->
+    <div class="rig-section">
+      <h2>VHF/UHF Station</h2>
+      <div class="rig-list">
+        <div class="rig-item">
+          <h3>Alinco DR-570</h3>
+          <ul class="rig-specs">
+            <li><strong>Power:</strong> 45W UHF/VHF</li>
+            <li><strong>Antennas:</strong> 
+              <ul>
+                <li>Siro 6 element beam (2m)</li>
+                <li>Ed Fong DBJ-150/450 (dual band)</li>
+              </ul>
+            </li>
+            <li><strong>Features:</strong> Cross-band repeat, 200 memories</li>
+          </ul>
+        </div>
+
+        <div class="rig-item">
+          <h3>Bearcat BCT15X Scanner</h3>
+          <ul class="rig-specs">
+            <li><strong>Antenna:</strong> Tram Discone at 45ft</li>
+            <li><strong>Coverage:</strong> 25-1300MHz</li>
+            <li><strong>Features:</strong> Close Call RF capture, 9000 channels</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Handheld Radios -->
+    <div class="rig-section">
+      <h2>Handheld Transceivers</h2>
+      <div class="rig-list">
+        <div class="rig-item">
+          <h3>Wouxun KG-935G</h3>
+          <ul class="rig-specs">
+            <li><strong>Bands:</strong> RX 144-148/420-450MHz| TX 462/467MHz </li>
+            <li><strong>Power:</strong> 5W</li>
+            <li><strong>Features:</strong> 256 channels</li>
+          </ul>
+        </div>
+
+        <div class="rig-item">
+          <h3>Quansheng UV-K5 (Modded)</h3>
+          <ul class="rig-specs">
+            <li><strong>Mods:</strong> IJV firmware, extended RX/TX</li>
+            <li><strong>Power:</strong> 5W</li>
+            <li><strong>Features:</strong> Wideband receiver, custom firmware</li>
+          </ul>
+        </div>
+
+        <div class="rig-item">
+          <h3>Motorola HT1250 (Rare)</h3>
+          <ul class="rig-specs">
+            <li><strong>Special:</strong> Factory green shell</li>
+            <li><strong>Power:</strong> 1-5W</li>
+            <li><strong>Features:</strong> Commercial-grade durability</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Specialized Equipment -->
+    <div class="rig-section">
+      <h2>Specialized Equipment</h2>
+      <div class="rig-list">
+        <div class="rig-item">
+          <h3>Lilygo T-Deck</h3>
+          <ul class="rig-specs">
+            <li><strong>Purpose:</strong> Meshtastic node</li>
+            <li><strong>Features:</strong> LoRa, keyboard, display</li>
+            <li><strong>Usage:</strong> Digital mesh networking</li>
+          </ul>
+        </div>
+
+        <div class="rig-item">
+          <h3>ADS-B Receiver</h3>
+          <ul class="rig-specs">
+            <li><strong>Antenna:</strong> Dedicated 1090MHz vertical</li>
+            <li><strong>Coverage:</strong> 200nm+ aircraft tracking</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Antenna Farm -->
+    <div class="rig-section">
+      <h2>Antenna Systems</h2>
+      <div class="rig-list">
+        <div class="rig-item">
+          <h3>HF Antennas</h3>
+          <ul class="rig-specs">
+            <li>MFJ 80-40m dipole @ 45ft</li>
+            <li>Various portable wires</li>
+          </ul>
+        </div>
+
+        <div class="rig-item">
+          <h3>VHF/UHF Antennas</h3>
+          <ul class="rig-specs">
+            <li>Tram Discone @ 45ft (Scanner)</li>
+            <li>Siro 6 element beam (2m)</li>
+            <li>Ed Fong DBJ-150/450</li>
+          </ul>
+        </div>
+
+        <div class="rig-item">
+          <h3>Parabolic Dishes</h3>
+          <ul class="rig-specs">
+            <li>Collection from 2ft to 7ft diameter</li>
+            <li class="special-note">Not currently deployed - need mounting solution</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+       <!-- Support Equipment -->
+    <div class="rig-section">
+      <h2>Support Equipment</h2>
+      <div class="rig-list">
+        <div class="rig-item">
+          <h3>Test & Measurement</h3>
+          <ul class="rig-specs">
+            <li>BK Precision 2120 20MHz Oscilloscope</li>
+            <li>Longwei 30V/10A Variable Bench PSU</li>
+            <li>Data Tech 30L Multimeter</li>
+            <li>Classic Simpson 260 Multimeter</li>
+            <li>Dosy Test Centers (x2)</li>
+            <li>Koolertron 15MHz DDS Signal Generator/Counter</li>
+          </ul>
+        </div>
+
+        <div class="rig-item">
+          <h3>Soldering/Rework</h3>
+          <ul class="rig-specs">
+            <li>Weller WE1010N 70W Digital Soldering Station</li>
+            <li>iHua 959D Digital Hot Air Rework Station</li>
+            <li><strong>Features:</strong> 3 memory presets, 212°F-932°F range</li>
+          </ul>
+        </div>
+
+        <div class="rig-item">
+          <h3>Amplifiers</h3>
+          <ul class="rig-specs">
+            <li>RM Italy KL-503 (200W PEP for G90)</li>
+          </ul>
+        </div>
+
+        <div class="rig-item">
+          <h3>Audio Gear</h3>
+          <ul class="rig-specs">
+            <li>Audio-Technica AT202 XLR microphone</li>
+            <li>Behringer Xenyx 802 mixer</li>
+          </ul>
+        </div>
+
+        <div class="rig-item">
+          <h3>Other Equipment</h3>
+          <ul class="rig-specs">
+            <li>Various non-operational radios/antennas</li>
+            <li>Additional test and measurement gear</li>
+            <li class="special-note">Multiple other items in storage/repair</li>
+          </ul>
+        </div>
+      </div>
+    </div>

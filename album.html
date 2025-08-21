@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://cdn.lgrckt-in.com/LogRocket.min.js" crossorigin="anonymous"></script>
+<script>window.LogRocket && window.LogRocket.init('uw6daw/my-github');</script>
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ham Radio Album</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      min-height: 100vh;
+      padding: 60px 15px 30px;
+      position: relative;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .photos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+      padding: 0 1rem;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .photo {
+      background: #1c1c1c;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .photo:hover {
+      transform: scale(1.03);
+    }
+
+    .photo img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      text-align: center;
+    }
+
+    .lightbox-img {
+      max-height: 80vh;
+      max-width: 90vw;
+      border-radius: 8px;
+    }
+
+    .lightbox-caption {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .close-btn, .nav-btn {
+      position: absolute;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 101;
+    }
+
+    .close-btn {
+      top: 20px;
+      right: 20px;
+    }
+
+    .prev-btn {
+      left: 20px;
+    }
+
+    .next-btn {
+      right: 20px;
+    }
+
+    .solar-widget {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      max-width: 150px;
+      z-index: 10;
+    }
+
+    .solar-widget img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .back-home {
+      position: absolute;
+      top: 10px;
+      left: 170px;
+      color: #bbb;
+      text-decoration: none;
+      font-size: 0.85rem;
+      z-index: 10;
+    }
+
+    .back-home:hover {
+      text-decoration: underline;
+    }
+
+    .back-to-projects {
+      display: block;
+      text-align: center;
+      margin: 1.5rem auto;
+      color: #bbb;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .back-to-projects:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="solar-widget">
+    <a href="https://www.hamqsl.com/solar.html" title="Click to add Solar-Terrestrial Data to your website!">
+      <img src="https://www.hamqsl.com/solarn0nbh.php" alt="Solar-Terrestrial Data" />
+    </a>
+  </div>
+
+  <a href="index.html" class="back-home">&larr; Back to Home</a>
+
+  <h1 id="album-title">Album</h1>
+
+  <div class="photos-grid" id="photos-grid"></div>
+
+  <a href="projects.html" class="back-to-projects">&larr; Back to All Projects</a>
+
+  <div class="lightbox" id="lightbox">
+    <button class="close-btn">&times;</button>
+    <button class="nav-btn prev-btn">&lt;</button>
+    <div class="lightbox-content">
+      <img class="lightbox-img" id="lightbox-img" src="" alt="">
+      <p class="lightbox-caption" id="lightbox-caption"></p>
+    </div>
+    <button class="nav-btn next-btn">&gt;</button>
+  </div>
+
+  <script>
+    const albumData = {
+      "main-projects": {
+        title: "Motorola stuff",
+        photos: [
+          { src: "Photos/1.jpg", caption: "Project 1" },
+          { src: "Photos/2.jpg", caption: "Project 2" },
+          { src: "Photos/3.jpg", caption: "Project 3" },
+        ]
+      },
+      "sr-447pc2": {
+        title: "SR-447PC2 Radio",
+        photos: [
+          { src: "Photos/SR-447PC2/SR 1.jpg", caption: "SR-447PC2 Front View" },
+          { src: "Photos/SR-447PC2/SR 2.jpg", caption: "SR-447PC2 Side View" },
+          { src: "Photos/SR-447PC2/SR 3.jpg", caption: "SR-447PC2 Controls" },
+          { src: "Photos/SR-447PC2/SR 4.jpg", caption: "SR-447PC2 Display" },
+          { src: "Photos/SR-447PC2/SR 5.jpg", caption: "SR-447PC2 Back Panel" },
+          { src: "Photos/SR-447PC2/SR 6.jpg", caption: "SR-447PC2 With Accessories" },
+          { src: "Photos/SR-447PC2/SR 7.jpg", caption: "SR-447PC2 In Operation" },
+          { src: "Photos/SR-447PC2/SR 8.jpg", caption: "SR-447PC2 Size Comparison" },
+          { src: "Photos/SR-447PC2/SR 9.jpg", caption: "SR-447PC2 Close-up" },
+          { src: "Photos/SR-447PC2/SR 10.jpg", caption: "SR-447PC2 Full Setup" }
+        ]
+      }
+    };
+
+    const albumId = localStorage.getItem('currentAlbum');
+    const album = albumData[albumId];
+    
+    if (album) {
+      document.getElementById('album-title').textContent = album.title;
+      const photosGrid = document.getElementById('photos-grid');
+      
+      album.photos.forEach((photo, index) => {
+        const photoElement = document.createElement('div');
+        photoElement.className = 'photo';
+        photoElement.innerHTML = `<img src="${photo.src}" alt="${photo.caption}">`;
+        photoElement.addEventListener('click', () => openLightbox(index));
+        photosGrid.appendChild(photoElement);
+      });
+    } else {
+      window.location.href = 'projects.html';
+    }
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const closeBtn = document.querySelector('.close-btn');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    
+    let currentPhotoIndex = 0;
+
+    function openLightbox(index) {
+      currentPhotoIndex = index;
+      updateLightbox();
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function updateLightbox() {
+      const photo = album.photos[currentPhotoIndex];
+      lightboxImg.src = photo.src;
+      lightboxCaption.textContent = photo.caption;
+    }
+
+    closeBtn.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+
+    prevBtn.addEventListener('click', () => {
+      currentPhotoIndex = (currentPhotoIndex - 1 + album.photos.length) % album.photos.length;
+      updateLightbox();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentPhotoIndex = (currentPhotoIndex + 1) % album.photos.length;
+      updateLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      
+      if (e.key === 'Escape') {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      } else if (e.key === 'ArrowLeft') {
+        currentPhotoIndex = (currentPhotoIndex - 1 + album.photos.length) % album.photos.length;
+        updateLightbox();
+      } else if (e.key === 'ArrowRight') {
+        currentPhotoIndex = (currentPhotoIndex + 1) % album.photos.length;
+        updateLightbox();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://cdn.lgrckt-in.com/LogRocket.min.js" crossorigin="anonymous"></script>
+<script>window.LogRocket && window.LogRocket.init('uw6daw/my-github');</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ham Radio Showcase</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .nav {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 1rem;
+      z-index: 10;
+    }
+
+    .nav a {
+      text-decoration: none;
+    }
+
+    button {
+      background: none;
+      border: 1px solid #444;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #1f1f1f;
+      border-color: #888;
+    }
+
+    .main-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding-top: 40px;
+    }
+
+    .content-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      min-height: 200px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #1c1c1c;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+      padding: 2rem;
+      margin-top: -60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .page {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 1.25rem;
+      flex-direction: column;
+    }
+
+    .page.active {
+      opacity: 1;
+      transform: translateX(0);
+      z-index: 1;
+    }
+
+    .hint {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    .solar-widget {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      max-width: 200px;
+    }
+
+    .solar-widget img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .back-home {
+      position: absolute;
+      top: 20px;
+      left: 240px;
+      color: #bbb;
+      text-decoration: none;
+      font-size: 0.95rem;
+      z-index: 10;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Solar Widget -->
+  <div class="solar-widget">
+    <a href="https://www.hamqsl.com/solar.html" title="Click to add Solar-Terrestrial Data to your website!">
+      <img src="https://www.hamqsl.com/solarn0nbh.php" alt="Solar-Terrestrial Data" />
+    </a>
+  </div>
+
+  <!-- Top-right Navigation -->
+  <div class="nav">
+    <button data-index="0" class="tab-btn active">Home</button>
+    <a href="projects.html"><button>Projects</button></a>
+    <a href="about.html"><button>About</button></a>
+  </div>
+
+  <!-- Centered Content -->
+  <div class="main-container">
+    <div class="content-wrapper">
+      <div class="page active">
+        <p>Welcome to my Radio hobby site.</p>
+        <p class="hint">👉 Go to the top right of your screen for more info.</p>
+      </div>
+      <div class="page">
+        <p>Explore my projects and radio equipment collection.</p>
+        <p class="hint">👉 Use the top right navigation buttons to learn more.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const pages = document.querySelectorAll('.page');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const index = btn.getAttribute('data-index');
+
+        tabButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        pages.forEach((page, i) => {
+          if (i == index) {
+            page.classList.add('active');
+          } else {
+            page.classList.remove('active');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
